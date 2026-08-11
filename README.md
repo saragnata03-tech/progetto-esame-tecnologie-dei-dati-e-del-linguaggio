@@ -1,5 +1,5 @@
 # Cartaceo vs Ebook: come cambia la copertina quando cambia il supporto
-
+## Dashboard interattive (link diretti) - [Dashboard RQ1/RQ2 — grafici e tabella filtrabile](https://saragnata03-tech.github.io/progetto-esame-tecnologie-dei-dati-e-del-linguaggio/dashboard/01_dashboard_rq1_rq2.html) - [Moodboard e prompt visivi (Traccia 11)](https://saragnata03-tech.github.io/progetto-esame-tecnologie-dei-dati-e-del-linguaggio/dashboard/02_moodboard_prompt.html) - [Confronto AI vs copertina reale — slider interattivo](https://saragnata03-tech.github.io/progetto-esame-tecnologie-dei-dati-e-del-linguaggio/dashboard/03_confronto_ai_vs_editore.html)
 Progetto per il corso **Tecnologie dei dati e del linguaggio** — analisi comparativa su 45 titoli dell'editoria italiana contemporanea (narrativa contemporanea e giallo/thriller), tra riuso visivo, linguaggio promozionale e pratiche editoriali del formato digitale.
 
 ## Modelli di intelligenza artificiale usati, e in che misura
