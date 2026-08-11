@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testo → Immagine — Moodboard e prompt di confronto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE2; --paper-dim:#E2DDD1; --ink:#1E1C19; --ink-soft:#57534A;
+    --giallo:#E7B10A; --giallo-soft:#F6E3A1; --narrativa:#2E4057; --narrativa-soft:#C7D2DE;
+    --rule:#C9C2AF; --card:#FBFAF7;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.5;}
+  .wrap{max-width:1100px;margin:0 auto;padding:48px 24px 80px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;}
+  h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(28px,4vw,42px);line-height:1.08;margin:0 0 16px;max-width:20ch;}
+  .intro{color:var(--ink-soft);max-width:66ch;font-size:15px;margin-bottom:44px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  @media(max-width:820px){.grid{grid-template-columns:1fr;}}
+  .card{background:var(--card);border:1px solid var(--rule);}
+  .card-head{padding:18px 20px;border-bottom:1px solid var(--rule);}
+  .genere-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;display:inline-block;margin-bottom:8px;}
+  .genere-tag.narrativa{background:var(--narrativa-soft);color:var(--narrativa);}
+  .genere-tag.giallo{background:var(--giallo-soft);color:#7A5C00;}
+  .card-head h3{font-family:'Fraunces',serif;font-size:19px;margin:0 0 3px;}
+  .card-head .autore{font-size:12.5px;color:var(--ink-soft);}
+  .card-body{padding:18px 20px;}
+  .cat-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:12px 0 6px;}
+  .cat-label:first-child{margin-top:0;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{font-size:12.5px;background:var(--paper-dim);border:1px solid var(--rule);padding:3px 9px;}
+  .prompt-box{
+    margin-top:16px;background:var(--ink);color:#EDEAE2;padding:14px 16px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.65;
+  }
+  .prompt-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--giallo);margin-bottom:6px;display:block;}
+  footer{margin-top:50px;border-top:1px solid var(--rule);padding-top:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Traccia 11 — Testo e immagine: descrivere, vedere, mostrare</div>
+  <h1>Dal testo alla copertina: 6 moodboard e prompt di confronto</h1>
+  <p class="intro">Per ciascun titolo: estrazione degli elementi visivi, spaziali e simbolici dalla sinossi (moodboard), e un prompt pronto per un generatore di immagini. Il confronto finale è a tre vie: moodboard estratta → immagine generata dal prompt → copertina reale pubblicata.</p>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-head">
+        <span class="genere-tag narrativa">Narrativa contemporanea</span>
+        <h3>La governante</h3>
+        <div class="autore">Csaba dalla Zorza — Marsilio</div>
+      </div>
+      <div class="card-body">
+        <div class="cat-label">Luogo</div>
+        <div class="chips"><span class="chip">interno borghese</span><span class="chip">armadio delle porcellane</span></div>
+        <div class="cat-label">Oggetti / simboli</div>
+        <div class="chips"><span class="chip">porcellane</span><span class="chip">specchio implicito</span></div>
+        <div class="cat-label">Atmosfera</div>
+        <div class="chips"><span class="chip">composta</span><span class="chip">algida in superficie</span><span class="chip">malinconica sotto</span></div>
+        <div class="cat-label">Personaggio</div>
+        <div class="chips"><span class="chip">donna, 60 anni</span><span class="chip">controllo vs desiderio nascosto</span></div>
+        <div class="prompt-box">
+          <span class="prompt-label">Prompt (EN, per resa migliore)</span>
+          Elegant minimalist book cover illustration, mature woman shown in quiet profile, soft neutral beige and ivory tones, an open wooden wardrobe filled with delicate white porcelain figurines in the background, quiet domestic interior lighting, subtle tension between composure and hidden longing, refined editorial illustration style, literary fiction cover design
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="genere-tag narrativa">Narrativa contemporanea</span>
+        <h3>Il libro bianco</h3>
+        <div class="autore">Han Kang — Adelphi</div>
+      </div>
+      <div class="card-body">
+        <div class="cat-label">Luogo</div>
+        <div class="chips"><span class="chip">Seoul in primavera</span><span class="chip">città sepolta nella neve</span></div>
+        <div class="cat-label">Oggetti / simboli</div>
+        <div class="chips"><span class="chip">fasce per neonata</span><span class="chip">zolletta di zucchero</span><span class="chip">luna</span><span class="chip">neve</span><span class="chip">stelle</span></div>
+        <div class="cat-label">Atmosfera</div>
+        <div class="chips"><span class="chip">eterea</span><span class="chip">silenziosa</span><span class="chip">pura</span><span class="chip">monocromatica</span></div>
+        <div class="cat-label">Personaggio</div>
+        <div class="chips"><span class="chip">assenza / sorella scomparsa</span></div>
+        <div class="prompt-box">
+          <span class="prompt-label">Prompt (EN, per resa migliore)</span>
+          Minimalist book cover, almost entirely white and pale grey palette, delicate abstract shapes evoking snow, moonlight and sea foam, a small white infant garment barely visible, ethereal and quiet mood, large negative space, poetic literary fiction cover, fine art illustration style
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="genere-tag narrativa">Narrativa contemporanea</span>
+        <h3>Ci vediamo in agosto</h3>
+        <div class="autore">Gabriel García Márquez — Mondadori</div>
+      </div>
+      <div class="card-body">
+        <div class="cat-label">Luogo</div>
+        <div class="chips"><span class="chip">isola caraibica</span><span class="chip">traghetto</span><span class="chip">hotel</span></div>
+        <div class="cat-label">Oggetti / simboli</div>
+        <div class="chips"><span class="chip">gladioli</span><span class="chip">orologio da tasca</span><span class="chip">musica e gin</span></div>
+        <div class="cat-label">Atmosfera</div>
+        <div class="chips"><span class="chip">calda</span><span class="chip">sensuale</span><span class="chip">malinconica</span><span class="chip">notturna</span></div>
+        <div class="cat-label">Personaggio</div>
+        <div class="chips"><span class="chip">donna, quasi 50 anni</span><span class="chip">rituale annuale</span></div>
+        <div class="prompt-box">
+          <span class="prompt-label">Prompt (EN, per resa migliore)</span>
+          Vibrant book cover illustration, Caribbean island at dusk, a solitary elegant woman near a ferry dock holding gladiolus flowers, warm golden and deep tropical blue palette, nostalgic and sensual atmosphere, magical realism literary fiction cover design
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="genere-tag giallo">Giallo / Thriller</span>
+        <h3>Non mentire</h3>
+        <div class="autore">Freida McFadden — Newton Compton</div>
+      </div>
+      <div class="card-body">
+        <div class="cat-label">Luogo</div>
+        <div class="chips"><span class="chip">maniero remoto</span><span class="chip">tempesta invernale</span><span class="chip">stanza segreta</span></div>
+        <div class="cat-label">Oggetti / simboli</div>
+        <div class="chips"><span class="chip">cassette audio</span><span class="chip">registrazioni</span></div>
+        <div class="cat-label">Atmosfera</div>
+        <div class="chips"><span class="chip">claustrofobica</span><span class="chip">gotica</span><span class="chip">tesa</span></div>
+        <div class="cat-label">Personaggio</div>
+        <div class="chips"><span class="chip">Tricia, esploratrice suo malgrado</span><span class="chip">dottoressa scomparsa</span></div>
+        <div class="prompt-box">
+          <span class="prompt-label">Prompt (EN, per resa migliore)</span>
+          Gothic thriller book cover, remote snowbound manor house at night during a violent winter storm, a single lit window, dark blue and grey stormy palette, sense of a hidden secret room, suspenseful psychological thriller cover design
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="genere-tag giallo">Giallo / Thriller</span>
+        <h3>Un animale selvaggio</h3>
+        <div class="autore">Joël Dicker — La nave di Teseo</div>
+      </div>
+      <div class="card-body">
+        <div class="cat-label">Luogo</div>
+        <div class="chips"><span class="chip">villa a Ginevra</span><span class="chip">lago</span><span class="chip">bosco</span><span class="chip">gioielleria</span></div>
+        <div class="cat-label">Oggetti / simboli</div>
+        <div class="chips"><span class="chip">gioielli rubati</span><span class="chip">sguardo voyeuristico</span></div>
+        <div class="cat-label">Atmosfera</div>
+        <div class="chips"><span class="chip">patinata</span><span class="chip">inquietante sotto la superficie</span></div>
+        <div class="cat-label">Personaggio</div>
+        <div class="chips"><span class="chip">Sophie, coppia "perfetta"</span><span class="chip">vicino ossessivo</span></div>
+        <div class="prompt-box">
+          <span class="prompt-label">Prompt (EN, per resa migliore)</span>
+          Glossy upmarket thriller book cover, elegant lakeside villa near Geneva, warm golden lighting contrasted with dark shadows in the surrounding woods, a subtle glittering jewel motif, a watching silhouette among the trees, luxury meets hidden danger, high-end thriller cover design
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="genere-tag giallo">Giallo / Thriller</span>
+        <h3>Ninfee nere</h3>
+        <div class="autore">Michel Bussi — E/O</div>
+      </div>
+      <div class="card-body">
+        <div class="cat-label">Luogo</div>
+        <div class="chips"><span class="chip">Giverny</span><span class="chip">giardino di Monet</span><span class="chip">torre</span></div>
+        <div class="cat-label">Oggetti / simboli</div>
+        <div class="chips"><span class="chip">ninfee</span><span class="chip">tele dipinte</span><span class="chip">riflessi d'acqua</span></div>
+        <div class="cat-label">Atmosfera</div>
+        <div class="chips"><span class="chip">impressionista</span><span class="chip">acquatica</span><span class="chip">ambigua</span></div>
+        <div class="cat-label">Personaggio</div>
+        <div class="chips"><span class="chip">bambina pittrice</span><span class="chip">maestra</span><span class="chip">vecchia che spia</span></div>
+        <div class="prompt-box">
+          <span class="prompt-label">Prompt (EN, per resa migliore)</span>
+          Impressionist-inspired mystery book cover, Monet-style water lily pond rendered in dark green and black tones instead of the usual soft pastels, a small watchtower silhouette in the distance, reflections on water blending beauty and unease, literary noir thriller cover design
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <b>Metodo —</b> estrazione manuale degli elementi visivi/spaziali/simbolici dalla sinossi, categorizzati in: luogo, oggetti/simboli, atmosfera, personaggio. Prompt scritti in inglese per compatibilità con la maggior parte dei generatori di immagini.<br>
+    <b>Prossimo passo —</b> incollare ciascun prompt in un generatore di immagini (es. Bing Image Creator, gratuito), salvare l'immagine ottenuta, confrontarla con moodboard e copertina reale pubblicata.
+  </footer>
+</div>
+</body>
+</html>

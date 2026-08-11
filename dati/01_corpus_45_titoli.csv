@@ -1,0 +1,50 @@
+id,titolo,autore,editore,anno,genere_provvisorio,note
+1,L'anniversario,Andrea Bajani,Feltrinelli,2025,narrativa_contemporanea,Premio Strega 2025
+2,"Verrà l'alba, starai bene",Gianluca Gotto,Mondadori,2025,narrativa_contemporanea,
+3,Io che ti ho voluto così bene,Roberta Recchia,Rizzoli,2025,narrativa_contemporanea,
+4,La governante,Csaba dalla Zorza,Marsilio,2025,narrativa_contemporanea,
+5,M. La fine e il principio,Antonio Scurati,Bompiani,2025,narrativa_contemporanea,
+6,La portalettere,Francesca Giannone,Nord,2023,narrativa_contemporanea,
+7,La strada giovane,Antonio Albanese,Feltrinelli,2025,narrativa_contemporanea,
+8,L'amante perduta di Shakespeare,Felicia Kingsley,Newton Compton,2025,narrativa_contemporanea,
+9,Ciliegie amare,Liliana Nechita,SEM,2026,narrativa_contemporanea,
+10,Platone. Una storia d'amore,Matteo Nucci,Einaudi,2025,narrativa_contemporanea,
+11,La ragazzina,Valeria Parrella,Feltrinelli,2025,narrativa_contemporanea,
+12,Il Gregge,Davide Grittani,Alter Ego,2024,narrativa_contemporanea,
+13,Una luce abbondante,Sonia Serazzi,Rubbettino,2024,narrativa_contemporanea,
+14,Pagine azzurre,Eleanor Perry (trad. Marco Rossari),SUR,2024,narrativa_contemporanea,
+15,Ci vediamo in agosto,Gabriel García Márquez (trad. Bruno Arpaia),Mondadori,2024,narrativa_contemporanea,pubblicato postumo
+16,Game of desire. Devozione,Hazel Riley,Sperling & Kupfer,2025,narrativa_contemporanea,filone romance
+17,Limitless. Senza paura,Karim B.,Sperling & Kupfer,2025,narrativa_contemporanea,filone romance
+18,Red. Colpo di fulmine,Stefania S.,Sperling & Kupfer,2025,narrativa_contemporanea,filone romance
+19,Soltanto il giorno,Santina Cosetta,Mondadori,2026,narrativa_contemporanea,
+20,Il libro bianco,Han Kang,Adelphi,2025,narrativa_contemporanea,Nobel per la letteratura
+21,Tatà,Valérie Perrin,E/O,2024,narrativa_contemporanea,titolo originale "Tata" verificato
+22,La luce degli incendi a dicembre,Matteo Bussola,Einaudi,2025,narrativa_contemporanea,
+23,Il passato è un morto senza cadavere,Antonio Manzini,Sellerio,2024,giallo_thriller,
+24,L'ultimo segreto,Dan Brown,Rizzoli,2025,giallo_thriller,
+25,Volver. Ritorno per il commissario Ricciardi,Maurizio de Giovanni,Einaudi,2024,giallo_thriller,
+26,Il pappagallo muto,Maurizio de Giovanni,Rizzoli,2025,giallo_thriller,serie "Sara"
+27,La catastrofica visita allo zoo,Joël Dicker,La nave di Teseo,2025,giallo_thriller,
+28,La casa dei silenzi,Donato Carrisi,Longanesi,2024,giallo_thriller,
+29,Delitto di benvenuto,Cristina Cassar Scalia,Einaudi,2025,giallo_thriller,serie Scipione Macchiavelli
+30,Mandorla amara,Cristina Cassar Scalia,Einaudi,2025,giallo_thriller,
+31,Le terme dell'Indirizzo,Cristina Cassar Scalia,FVE,2026,giallo_thriller,
+32,Il tallone da killer,Alessandro Robecchi,Sellerio,2025,giallo_thriller,
+33,Miss Bee e il cadavere in biblioteca,Alessia Gazzola,Longanesi,2024,giallo_thriller,
+34,Never flinch,Stephen King,Sperling & Kupfer,2025,giallo_thriller,edizione italiana confermata 2025
+35,Le aquile della notte,Alice Basso,Garzanti,2023,giallo_thriller,
+36,Il trattamento del silenzio,Gian Andrea Cerone,Guanda,2023,giallo_thriller,
+37,Delitto a Tokyo,Keigo Higashino,Piemme,2023,giallo_thriller,edizione italiana tradotta
+38,L'uomo dagli occhi tristi,Piergiorgio Pulixi,Rizzoli,,giallo_thriller,serie "I canti del male" - verificare anno esatto
+39,Non mentire,Freida McFadden,Newton Compton,2024,giallo_thriller,esistono più edizioni/collane con ISBN diversi - utile per RQ1
+40,Un animale selvaggio,Joël Dicker,La nave di Teseo,2024,giallo_thriller,
+41,Ninfee nere,Michel Bussi,E/O,2016,giallo_thriller,edizione italiana confermata 09/06/2016
+42,Labirinti,Franck Thilliez,Fazi,2023,giallo_thriller,edizione italiana confermata 30/05/2023
+43,Mimica,Sebastian Fitzek,Fazi,2025,giallo_thriller,edizione italiana confermata 08/07/2025
+44,Love Mom,Iliana Xander,Longanesi,2026,giallo_thriller,edizione italiana confermata 03/05/2026
+45,Le voci intorno a me,Natalie Chandler,Giunti,2025,giallo_thriller,edizione italiana confermata 23/09/2025
+# NOTA METODOLOGICA: tutti i 45 titoli hanno ora editore/anno confermati (fonti web + conferma diretta
+# dell'autrice del progetto per i titoli di nicchia). Resta da verificare solo l'anno esatto di due titoli
+# (riga 12 e riga 38), dettaglio minore che lo script Google Books/Open Library del prossimo step
+# risolverà automaticamente tramite ricerca per titolo+autore.

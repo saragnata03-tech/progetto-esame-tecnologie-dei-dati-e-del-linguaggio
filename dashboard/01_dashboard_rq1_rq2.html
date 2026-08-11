@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartaceo vs Ebook — Dashboard del progetto</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.32.0/plotly.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE2;
+    --paper-dim:#E2DDD1;
+    --ink:#1E1C19;
+    --ink-soft:#57534A;
+    --giallo:#E7B10A;
+    --giallo-soft:#F6E3A1;
+    --narrativa:#2E4057;
+    --narrativa-soft:#C7D2DE;
+    --diversa:#8C3B3B;
+    --neutro:#8A8677;
+    --rule:#C9C2AF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* ===== HERO ===== */
+  header.hero{
+    border-bottom:1px solid var(--rule);
+    padding:56px 0 40px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.05;
+    margin:0 0 20px;
+    max-width:16ch;
+  }
+  .subtitle{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0 0 30px;
+  }
+  .fascetta{
+    display:inline-flex;
+    align-items:baseline;
+    gap:10px;
+    background:var(--giallo);
+    color:var(--ink);
+    padding:10px 20px;
+    transform:rotate(-1.2deg);
+    box-shadow:3px 4px 0 rgba(30,28,25,0.15);
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .fascetta .num{font-size:28px;font-weight:600;}
+  .fascetta .lbl{font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;}
+
+  .meta-row{
+    display:flex;gap:28px;margin-top:34px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);
+  }
+  .meta-row div span{display:block;color:var(--ink);font-size:14px;margin-top:2px;}
+
+  /* ===== SECTIONS ===== */
+  section{padding:48px 0;border-bottom:1px solid var(--rule);}
+  .section-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:8px;
+  }
+  h2{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(22px,3vw,30px);margin:0 0 10px;
+  }
+  .rq-text{color:var(--ink-soft);max-width:64ch;margin-bottom:28px;font-size:15px;}
+  .finding{
+    font-size:15px;background:var(--paper-dim);border-left:3px solid var(--giallo);
+    padding:14px 18px;margin-top:18px;max-width:64ch;
+  }
+  .finding b{font-family:'IBM Plex Mono',monospace;font-weight:500;}
+
+  /* ===== FILTER PILLS ===== */
+  .pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+  .pill{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+    padding:7px 14px;border:1px solid var(--ink);background:transparent;
+    cursor:pointer;color:var(--ink);transition:.15s;
+  }
+  .pill.active{background:var(--ink);color:var(--paper);}
+  .pill:hover:not(.active){background:var(--paper-dim);}
+
+  .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media(max-width:800px){.charts-grid{grid-template-columns:1fr;}}
+  .chart-box{background:#fff;border:1px solid var(--rule);}
+
+  /* ===== TABLE ===== */
+  .table-controls{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+  input#search{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    padding:8px 12px;border:1px solid var(--ink);background:#fff;flex:1;min-width:200px;
+  }
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  thead th{
+    text-align:left;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);
+    border-bottom:1px solid var(--ink);padding:8px 10px;cursor:pointer;user-select:none;
+  }
+  thead th:hover{color:var(--ink);}
+  tbody td{padding:9px 10px;border-bottom:1px solid var(--rule);}
+  tbody tr:hover{background:var(--paper-dim);}
+  .badge{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;padding:2px 8px;
+    display:inline-block;text-transform:uppercase;letter-spacing:.04em;
+  }
+  .badge.uguale{background:var(--narrativa-soft);color:var(--narrativa);}
+  .badge.diversa{background:#EAD2D2;color:var(--diversa);}
+  .badge.no_ebook{background:#E4E1D8;color:var(--neutro);}
+  .row-count{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+
+  /* ===== SLIDER (RQ2) ===== */
+  .slider-row{display:flex;align-items:center;gap:14px;margin-bottom:20px;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  input[type=range]{flex:1;accent-color:var(--ink);}
+
+  /* ===== COLOPHON FOOTER ===== */
+  footer{padding:40px 0 60px;}
+  .colophon{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);
+    border-top:1px solid var(--rule);padding-top:24px;line-height:1.8;
+  }
+  .colophon b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Tecnologie dei dati e del linguaggio — progetto di fine corso</div>
+    <h1>Cartaceo vs Ebook<br>come cambia la copertina<br>quando cambia il supporto</h1>
+    <p class="subtitle">Analisi comparativa su 45 titoli dell'editoria italiana contemporanea (narrativa e giallo/thriller), tra riuso visivo, linguaggio promozionale e pratiche editoriali del formato digitale.</p>
+    <div class="fascetta"><span class="num">93%</span><span class="lbl">copertine identiche<br>tra cartaceo ed ebook</span></div>
+    <div class="meta-row">
+      <div>Corpus<span>45 titoli</span></div>
+      <div>Generi<span>Narrativa · Giallo/Thriller</span></div>
+      <div>Sinossi analizzate<span>24 titoli</span></div>
+      <div>Domande di ricerca<span>4 (RQ1–RQ4)</span></div>
+    </div>
+  </header>
+
+  <!-- RQ1 -->
+  <section id="rq1">
+    <div class="section-label">RQ1 — Confronto visivo</div>
+    <h2>Cosa cambia tra copertina cartacea ed ebook?</h2>
+    <p class="rq-text">Per ciascuno dei 45 titoli, confronto diretto tra la copertina dell'edizione cartacea e quella dell'edizione ebook, classificando ogni caso come identico, diverso, o privo di edizione ebook.</p>
+
+    <div class="pills" id="rq1-pills">
+      <button class="pill active" data-genere="tutti">Tutti i generi</button>
+      <button class="pill" data-genere="narrativa_contemporanea">Narrativa contemporanea</button>
+      <button class="pill" data-genere="giallo_thriller">Giallo / Thriller</button>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-box" id="rq1-donut" style="height:360px;"></div>
+      <div class="chart-box" id="rq1-bars" style="height:360px;"></div>
+    </div>
+
+    <div class="finding">
+      <b>Lettura del dato —</b> il riuso identico della copertina è la norma quasi assoluta (93%), trasversale a entrambi i generi (91% narrativa, 96% giallo/thriller). L'unica differenza reale osservata (<i>Il trattamento del silenzio</i>) riguarda dimensione del titolo e fasce promozionali, non un redesign. Due titoli di piccoli editori (SEM, Alter Ego) non hanno affatto edizione ebook.
+    </div>
+  </section>
+
+  <!-- RQ2 -->
+  <section id="rq2">
+    <div class="section-label">RQ2 — Analisi lessicale</div>
+    <h2>Il linguaggio delle sinossi cambia per genere?</h2>
+    <p class="rq-text">Frequenza delle parole (nomi propri e stopword esclusi) nelle sinossi di 24 titoli, 12 per genere. Usa lo slider per esplorare più o meno termini per lato.</p>
+
+    <div class="slider-row">
+      <span>Termini mostrati:</span>
+      <input type="range" id="rq2-slider" min="5" max="15" value="10">
+      <span id="rq2-slider-val">10</span>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-box" id="rq2-narrativa" style="height:400px;"></div>
+      <div class="chart-box" id="rq2-giallo" style="height:400px;"></div>
+    </div>
+
+    <div class="chart-box" id="rq2-lunghezza" style="height:260px;margin-top:24px;"></div>
+
+    <div class="finding">
+      <b>Lettura del dato —</b> narrativa: lessico di relazione ed esistenza (vita, donna, famiglia, madre, amore). Giallo/thriller: lessico di mistero e ricerca (tempo, passato, scomparsa, indagine). Le sinossi di narrativa sono in media il 28% più lunghe (204 vs 160 parole).
+    </div>
+  </section>
+
+  <!-- Tabella esplorabile -->
+  <section id="dataset">
+    <div class="section-label">Dataset completo</div>
+    <h2>Esplora i 45 titoli</h2>
+    <p class="rq-text">Cerca per titolo o autore, filtra per esito del confronto, ordina cliccando sulle intestazioni.</p>
+
+    <div class="table-controls">
+      <input type="text" id="search" placeholder="Cerca titolo o autore…">
+      <div class="pills" id="stato-pills">
+        <button class="pill active" data-stato="tutti">Tutti</button>
+        <button class="pill" data-stato="uguale">Identica</button>
+        <button class="pill" data-stato="diversa">Diversa</button>
+        <button class="pill" data-stato="no_ebook">No ebook</button>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th data-key="titolo">Titolo</th>
+          <th data-key="autore">Autore</th>
+          <th data-key="genere">Genere</th>
+          <th data-key="stato">Esito</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <div class="row-count" id="row-count"></div>
+  </section>
+
+  <footer>
+    <div class="colophon">
+      <b>Colophon —</b> Dashboard generata per il progetto "Cartaceo vs Ebook", corso di Tecnologie dei dati e del linguaggio.<br>
+      Dati raccolti manualmente da pagine editoriali pubbliche (IBS, editori) tra agosto 2026.<br>
+      Metodo di annotazione lessicale: tokenizzazione, rimozione stopword italiane, esclusione euristica dei nomi propri (parole capitalizzate non a inizio frase).<br>
+      Codice sorgente e dataset completi nel repository.
+    </div>
+  </footer>
+</div>
+
+<script>
+const DATA = {"titoli": [{"id": 1, "titolo": "L'anniversario", "autore": "Andrea Bajani", "stato": "uguale", "note": null, "genere": "narrativa_contemporanea"}, {"id": 2, "titolo": "Verrà l'alba, starai bene", "autore": "Gianluca Gotto", "stato": "uguale", "note": null, "genere": "narrativa_contemporanea"}, {"id": 3, "titolo": "Io che ti ho voluto così bene", "autore": "Roberta Recchia", "stato": "uguale", "note": null, "genere": "narrativa_contemporanea"}, {"id": 4, "titolo": "La governante", "autore": "Csaba dalla Zorza", "stato": "uguale", "note": null, "genere": "narrativa_contemporanea"}, {"id": 5, "titolo": "M. La fine e il principio", "autore": "Antonio Scurati", "stato": "uguale", "note": null, "genere": "narrativa_contemporanea"}, {"id": 6, "titolo": "La portalettere", "autore": "Francesca Giannone", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 7, "titolo": "La strada giovane", "autore": "Antonio Albanese", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 8, "titolo": "L'amante perduta di Shakespeare", "autore": "Felicia Kingsley", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 9, "titolo": "Ciliegie amare", "autore": "Liliana Nechita", "genere": "narrativa_contemporanea", "stato": null, "note": "non c'è ebook"}, {"id": 10, "titolo": "Platone. Una storia d'amore", "autore": "Matteo Nucci", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 11, "titolo": "La ragazzina", "autore": "Valeria Parrella", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 12, "titolo": "Il Gregge", "autore": "Davide Grittani", "genere": "narrativa_contemporanea", "stato": null, "note": "non c'è ebook"}, {"id": 13, "titolo": "Una luce abbondante", "autore": "Sonia Serazzi", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 14, "titolo": "Pagine azzurre", "autore": "Eleanor Perry", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 15, "titolo": "Ci vediamo in agosto", "autore": "Gabriel García Márquez", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 16, "titolo": "Game of desire. Devozione", "autore": "Hazel Riley", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 17, "titolo": "Limitless. Senza paura", "autore": "Karim B.", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 18, "titolo": "Red. Colpo di fulmine", "autore": "Stefania S.", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 19, "titolo": "Soltanto il giorno", "autore": "Santina Cosetta", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 20, "titolo": "Il libro bianco", "autore": "Han Kang", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 21, "titolo": "Tatà", "autore": "Valérie Perrin", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 22, "titolo": "La luce degli incendi a dicembre", "autore": "Matteo Bussola", "genere": "narrativa_contemporanea", "stato": "uguale", "note": null}, {"id": 23, "titolo": "Il passato è un morto senza cadavere", "autore": "Antonio Manzini", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 24, "titolo": "L'ultimo segreto", "autore": "Dan Brown", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 25, "titolo": "Volver. Ritorno per il commissario Ricciardi", "autore": "Maurizio de Giovanni", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 26, "titolo": "Il pappagallo muto", "autore": "Maurizio de Giovanni", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 27, "titolo": "La catastrofica visita allo zoo", "autore": "Joël Dicker", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 28, "titolo": "La casa dei silenzi", "autore": "Donato Carrisi", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 29, "titolo": "Delitto di benvenuto", "autore": "Cristina Cassar Scalia", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 30, "titolo": "Mandorla amara", "autore": "Cristina Cassar Scalia", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 31, "titolo": "Le terme dell'Indirizzo", "autore": "Cristina Cassar Scalia", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 32, "titolo": "Il tallone da killer", "autore": "Alessandro Robecchi", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 33, "titolo": "Miss Bee e il cadavere in biblioteca", "autore": "Alessia Gazzola", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 34, "titolo": "Never flinch", "autore": "Stephen King", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 35, "titolo": "Le aquile della notte", "autore": "Alice Basso", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 36, "titolo": "Il trattamento del silenzio", "autore": "Gian Andrea Cerone", "genere": "giallo_thriller", "stato": "diversa", "note": "modifiche lievi nella dimensione del titolo e nella disposizione delle bande gialle"}, {"id": 37, "titolo": "Delitto a Tokyo", "autore": "Keigo Higashino", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 38, "titolo": "L'uomo dagli occhi tristi", "autore": "Piergiorgio Pulixi", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 39, "titolo": "Non mentire", "autore": "Freida McFadden", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 40, "titolo": "Un animale selvaggio", "autore": "Joël Dicker", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 41, "titolo": "Ninfee nere", "autore": "Michel Bussi", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 42, "titolo": "Labirinti", "autore": "Franck Thilliez", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 43, "titolo": "Mimica", "autore": "Sebastian Fitzek", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 44, "titolo": "Love Mom", "autore": "Iliana Xander", "genere": "giallo_thriller", "stato": "uguale", "note": null}, {"id": 45, "titolo": "Le voci intorno a me", "autore": "Natalie Chandler", "genere": "giallo_thriller", "stato": "uguale", "note": null}], "rq1_conteggio_generale": {"uguale": 42, "no_ebook": 2, "diversa": 1}, "rq1_per_genere": {"narrativa_contemporanea": {"n": 22, "conteggio": {"uguale": 20, "no_ebook": 2}}, "giallo_thriller": {"n": 23, "conteggio": {"uguale": 22, "diversa": 1}}}, "rq2_lunghezze": {"narrativa_contemporanea": [233, 256, 215, 208, 305, 100, 241, 177, 169, 226, 171, 151], "giallo_thriller": [234, 197, 134, 40, 203, 113, 113, 200, 147, 173, 184, 185]}, "rq2_top_parole": {"narrativa_contemporanea": [["anni", 12], ["vita", 11], ["senza", 9], ["donna", 9], ["famiglia", 7], ["storia", 7], ["dalla", 6], ["quasi", 6], ["madre", 5], ["amore", 5], ["dolore", 5], ["mette", 5], ["guerra", 5], ["casa", 4], ["vivere", 4]], "giallo_thriller": [["tempo", 7], ["passato", 7], ["senza", 6], ["anni", 6], ["scomparsa", 5], ["quale", 5], ["dalla", 5], ["città", 4], ["storia", 4], ["sta", 4], ["dal", 4], ["indagine", 4], ["abita", 3], ["fuga", 3], ["donna", 3]]}};
+
+const COLORS = {
+  uguale: '#2E4057',
+  diversa: '#8C3B3B',
+  no_ebook: '#8A8677',
+  narrativa_contemporanea: '#2E4057',
+  giallo_thriller: '#E7B10A'
+};
+const LABELS = { uguale:'Identica', diversa:'Diversa', no_ebook:'No ebook' };
+
+function statoOf(t){ return t.stato || 'no_ebook'; }
+
+/* ---------- RQ1 ---------- */
+function renderRQ1(genereFiltro){
+  const titoli = genereFiltro === 'tutti' ? DATA.titoli : DATA.titoli.filter(t => t.genere === genereFiltro);
+  const conteggio = {uguale:0, diversa:0, no_ebook:0};
+  titoli.forEach(t => conteggio[statoOf(t)]++);
+
+  Plotly.newPlot('rq1-donut', [{
+    type:'pie', hole:.55,
+    labels:Object.keys(conteggio).map(k=>LABELS[k]),
+    values:Object.values(conteggio),
+    marker:{colors:Object.keys(conteggio).map(k=>COLORS[k])},
+    textinfo:'percent', hoverinfo:'label+value'
+  }], {
+    margin:{t:20,b:20,l:20,r:20},
+    font:{family:'IBM Plex Sans', size:12},
+    showlegend:true, legend:{orientation:'h', y:-.1}
+  }, {displayModeBar:false, responsive:true});
+
+  const generi = ['narrativa_contemporanea','giallo_thriller'];
+  const traces = ['uguale','diversa','no_ebook'].map(stato => ({
+    x: generi.map(g => LABELS_GENERE(g)),
+    y: generi.map(g => {
+      const sotto = DATA.titoli.filter(t=>t.genere===g);
+      return sotto.filter(t=>statoOf(t)===stato).length;
+    }),
+    name: LABELS[stato],
+    type:'bar',
+    marker:{color:COLORS[stato]}
+  }));
+  Plotly.newPlot('rq1-bars', traces, {
+    barmode:'stack', margin:{t:20,b:40,l:40,r:20},
+    font:{family:'IBM Plex Sans', size:12},
+    legend:{orientation:'h', y:-.2}
+  }, {displayModeBar:false, responsive:true});
+}
+function LABELS_GENERE(g){ return g==='narrativa_contemporanea' ? 'Narrativa' : 'Giallo/Thriller'; }
+
+document.querySelectorAll('#rq1-pills .pill').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#rq1-pills .pill').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRQ1(btn.dataset.genere);
+  });
+});
+
+/* ---------- RQ2 ---------- */
+function renderRQ2(n){
+  const narr = DATA.rq2_top_parole.narrativa_contemporanea.slice(0,n).reverse();
+  const gial = DATA.rq2_top_parole.giallo_thriller.slice(0,n).reverse();
+
+  Plotly.newPlot('rq2-narrativa', [{
+    type:'bar', orientation:'h',
+    x:narr.map(d=>d[1]), y:narr.map(d=>d[0]),
+    marker:{color: COLORS.narrativa_contemporanea}
+  }], {
+    title:{text:'Narrativa contemporanea', font:{family:'Fraunces', size:15}},
+    margin:{t:40,b:30,l:90,r:20}, font:{family:'IBM Plex Sans', size:12}
+  }, {displayModeBar:false, responsive:true});
+
+  Plotly.newPlot('rq2-giallo', [{
+    type:'bar', orientation:'h',
+    x:gial.map(d=>d[1]), y:gial.map(d=>d[0]),
+    marker:{color: COLORS.giallo_thriller}
+  }], {
+    title:{text:'Giallo / Thriller', font:{family:'Fraunces', size:15}},
+    margin:{t:40,b:30,l:90,r:20}, font:{family:'IBM Plex Sans', size:12}
+  }, {displayModeBar:false, responsive:true});
+}
+document.getElementById('rq2-slider').addEventListener('input', (e)=>{
+  document.getElementById('rq2-slider-val').textContent = e.target.value;
+  renderRQ2(parseInt(e.target.value));
+});
+
+function renderLunghezza(){
+  const gs = ['narrativa_contemporanea','giallo_thriller'];
+  const medie = gs.map(g=>{
+    const arr = DATA.rq2_lunghezze[g];
+    return arr.reduce((a,b)=>a+b,0)/arr.length;
+  });
+  Plotly.newPlot('rq2-lunghezza', [{
+    type:'bar', x:gs.map(LABELS_GENERE), y:medie,
+    marker:{color:[COLORS.narrativa_contemporanea, COLORS.giallo_thriller]},
+    text:medie.map(m=>m.toFixed(0)+' parole'), textposition:'outside'
+  }], {
+    title:{text:'Lunghezza media sinossi', font:{family:'Fraunces', size:15}},
+    margin:{t:40,b:30,l:50,r:20}, font:{family:'IBM Plex Sans', size:12}
+  }, {displayModeBar:false, responsive:true});
+}
+
+/* ---------- Tabella ---------- */
+let statoFiltro = 'tutti', searchTerm = '', sortKey='id', sortAsc=true;
+
+function renderTable(){
+  let rows = DATA.titoli.filter(t=>{
+    const okStato = statoFiltro==='tutti' || statoOf(t)===statoFiltro;
+    const okSearch = (t.titolo+' '+t.autore).toLowerCase().includes(searchTerm.toLowerCase());
+    return okStato && okSearch;
+  });
+  rows.sort((a,b)=>{
+    let va = sortKey==='stato' ? statoOf(a) : a[sortKey];
+    let vb = sortKey==='stato' ? statoOf(b) : b[sortKey];
+    if (va < vb) return sortAsc ? -1 : 1;
+    if (va > vb) return sortAsc ? 1 : -1;
+    return 0;
+  });
+
+  document.getElementById('table-body').innerHTML = rows.map(t=>`
+    <tr>
+      <td>${t.titolo}</td>
+      <td>${t.autore}</td>
+      <td>${LABELS_GENERE(t.genere)}</td>
+      <td><span class="badge ${statoOf(t)}">${LABELS[statoOf(t)]}</span></td>
+    </tr>
+  `).join('');
+  document.getElementById('row-count').textContent = `${rows.length} titoli su 45`;
+}
+
+document.getElementById('search').addEventListener('input', e=>{
+  searchTerm = e.target.value; renderTable();
+});
+document.querySelectorAll('#stato-pills .pill').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#stato-pills .pill').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    statoFiltro = btn.dataset.stato;
+    renderTable();
+  });
+});
+document.querySelectorAll('thead th').forEach(th=>{
+  th.addEventListener('click', ()=>{
+    const key = th.dataset.key;
+    if (sortKey===key) sortAsc = !sortAsc; else { sortKey = key; sortAsc = true; }
+    renderTable();
+  });
+});
+
+/* ---------- Init ---------- */
+renderRQ1('tutti');
+renderRQ2(10);
+renderLunghezza();
+renderTable();
+</script>
+</body>
+</html>
