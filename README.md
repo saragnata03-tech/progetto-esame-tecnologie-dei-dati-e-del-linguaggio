@@ -14,12 +14,15 @@ Questo progetto nasce come **ibrido tra due tracce del corso**, unite dal filo c
 ## Domande di ricerca e ipotesi
 
 **RQ1 — Cosa cambia visivamente tra copertina cartacea ed ebook per lo stesso titolo? Questa variazione dipende dal genere editoriale o da un adattamento per la resa in miniatura (thumbnail)?**
+
 *Ipotesi iniziale:* certo grado di adattamento tra i due formati (semplificazione per la resa in miniatura, differenze cromatiche o di impaginazione) e divergenza più marcata nel genere con codificazione iconografica più forte (giallo/thriller) rispetto a uno più essenziale (narrativa contemporanea).
 
 **RQ2 — Esistono pattern lessicali nelle sinossi che si associano al genere editoriale?**
+
 *Ipotesi iniziale:* generi diversi (narrativa vs giallo/thriller) mobilitano un lessico promozionale sistematicamente diverso, coerente con le rispettive convenzioni di genere.
 
 **RQ3 — Un generatore di immagini guidato da un prompt costruito a partire dalla sinossi produce una copertina concettualmente e visivamente vicina a quella scelta dall'editore?**
+
 *Ipotesi iniziale:* un prompt fedele agli elementi descrittivi del testo dovrebbe produrre un'immagine ragionevolmente allineata alla copertina reale, in quanto entrambe derivano dallo stesso materiale narrativo di partenza.
 
 ## Dati e metodo
